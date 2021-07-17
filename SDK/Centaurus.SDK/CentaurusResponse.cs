@@ -23,14 +23,7 @@ namespace Centaurus.SDK
 
     public class CentaurusResponse : CentaurusResponseBase
     {
-        public CentaurusResponse(RawPubKey alphaPubKey, RawPubKey[] auditors, int requestTimeout)
-        {
-            AlphaPubkey = alphaPubKey;
-            Auditors = auditors;
-            _ = StartRequestTimer(requestTimeout);
-        }
-
-
+        const int timeout = 15000;
         async Task StartRequestTimer(int requestTimeout)
         {
             await Task.Delay(requestTimeout);
@@ -69,15 +62,19 @@ namespace Centaurus.SDK
                 return;
             acknowledgmentSource.TrySetException(exc);
         }
+
+        public static CentaurusResponse Create(MessageEnvelope envelope)
+        {
+            var response = envelope.Message is SequentialRequestMessage ? new CentaurusQuantumResponse() : new CentaurusResponse();
+            response.AlphaPubkey = alphaPubKey; //constellationInfo.VaultPubKey, constellationInfo.AuditorPubKeys, timeout
+            response.Auditors = auditors;
+            StartRequestTimer(requestTimeout);
+            return response;
+        }
     }
 
     public class CentaurusQuantumResponse : CentaurusResponse
     {
-        public CentaurusQuantumResponse(RawPubKey alphaPubKey, RawPubKey[] auditors, int requestTimeout)
-            : base(alphaPubKey, auditors, requestTimeout)
-        {
-        }
-
         private TaskCompletionSource<MessageEnvelope> finalizeSource = new TaskCompletionSource<MessageEnvelope>();
 
         public Task<MessageEnvelope> FinalizeTask => finalizeSource.Task;
@@ -95,8 +92,6 @@ namespace Centaurus.SDK
                     throw new RequestException(envelope, "Duplicate signatures.");
                 if (!envelope.Signatures.Any(s => s.Signer.Equals(AlphaPubkey)))
                     throw new RequestException(envelope, "Result signature was not signed by Alpha.");
-                if (!envelope.Signatures.All(s => Auditors.Any(a => s.Signer.Equals(a)) || s.Signer.Equals(AlphaPubkey)))
-                    throw new RequestException(envelope, "Unknown signer.");
                 if (!(resultMessage is ITransactionResultMessage || envelope.AreSignaturesValid()))//TODO: remove it after ITransactionResultMessage refactoring
                     throw new RequestException(envelope, "At least one signature is invalid.");
 
