@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Centaurus.Models.Extensions
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Centaurus.Common", "..\Centaurus.Common\Centaurus.Common.csproj", "{740EF3D9-EBC5-41C0-BF40-14B61E9C617D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Centaurus.SDK.Test", "Centaurus.SDK.Test\Centaurus.SDK.Test.csproj", "{0D43ECC9-5343-4CF8-A19B-1601218A4459}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{740EF3D9-EBC5-41C0-BF40-14B61E9C617D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{740EF3D9-EBC5-41C0-BF40-14B61E9C617D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{740EF3D9-EBC5-41C0-BF40-14B61E9C617D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D43ECC9-5343-4CF8-A19B-1601218A4459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D43ECC9-5343-4CF8-A19B-1601218A4459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D43ECC9-5343-4CF8-A19B-1601218A4459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D43ECC9-5343-4CF8-A19B-1601218A4459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
