@@ -134,7 +134,7 @@ responsiveness of centralized systems.
 
 ### Async consensus principle
 
-The cornerstone principle of the async consensus paradigm based on the assumption that consensus 
+The cornerstone principle of the async consensus paradigm is based on the assumption that consensus 
 participants may safely delay the operation validation if the assets are securely locked on the 
 account balance in the trusted system. Stellar provides the trusted environment and all required 
 security primitives out of the box: transactions, multi-sig accounts, configurable thresholds. 
